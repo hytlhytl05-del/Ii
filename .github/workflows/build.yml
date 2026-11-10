@@ -27,8 +27,11 @@ jobs:
           sed -i 's|</application>|<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-8040428097634812~5167640078"/></application>|' $M
           sed -i 's|android:label="[^"]*"|android:label="كبسة"|' $M
           sed -i 's/minSdk = flutter.minSdkVersion/minSdk = 23/; s/minSdkVersion flutter.minSdkVersion/minSdkVersion 23/' android/app/build.gradle*
-            - run: flutter pub get && flutter build apk --release --no-shrink
+      - name: Build release APK
         working-directory: kabsa_app
+        run: |
+          flutter pub get
+          flutter build apk --release --no-shrink
       - uses: actions/upload-artifact@v4
         with:
           name: kabsa-apk
